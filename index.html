@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Waste Separation Cycle</title>
+<style>
+  :root {
+    --moss: #3f5b3f;
+    --forest: #24361f;
+    --paper: #f1efe6;
+    --clay: #b5652f;
+    --charcoal: #262420;
+    --line: rgba(38,36,32,0.15);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--charcoal);
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    line-height: 1.6;
+  }
+
+  header {
+    padding: 4.5rem 1.5rem 3rem;
+    text-align: left;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.8rem;
+    color: var(--moss);
+    letter-spacing: 0.02em;
+    margin: 0 0 0.75rem;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+    color: var(--forest);
+    font-weight: 500;
+  }
+
+  header p {
+    font-size: 1.1rem;
+    max-width: 55ch;
+    color: var(--charcoal);
+    opacity: 0.85;
+  }
+
+  .video-wrap {
+    max-width: 900px;
+    margin: 0 auto 4rem;
+    padding: 0 1.5rem;
+  }
+
+  video {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+    box-shadow: 0 12px 30px rgba(36, 54, 31, 0.18);
+  }
+
+  .caption {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.85rem;
+    color: var(--charcoal);
+    opacity: 0.6;
+    margin-top: 0.75rem;
+  }
+
+  .cycle {
+    max-width: 900px;
+    margin: 0 auto 5rem;
+    padding: 0 1.5rem;
+  }
+
+  .cycle h2 {
+    font-size: 1.6rem;
+    color: var(--forest);
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    gap: 1.25rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .step .n {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.4rem;
+    color: var(--clay);
+    font-weight: 300;
+  }
+
+  .step h3 {
+    margin: 0 0 0.35rem;
+    font-size: 1.15rem;
+    color: var(--forest);
+    font-weight: 500;
+  }
+
+  .step p {
+    margin: 0;
+    max-width: 60ch;
+    opacity: 0.85;
+  }
+
+  footer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.85rem;
+    color: var(--charcoal);
+    opacity: 0.55;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 3rem 1.25rem 2rem; }
+    .step { grid-template-columns: 2.5rem 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">A home recycling record</p>
+  <h1>How our waste finds its way back into the cycle</h1>
+  <p>Every household throws things away. What happens in the ten seconds before that is the part worth watching — the sorting, the separating, the small decisions that keep material out of a landfill.</p>
+</header>
+
+<div class="video-wrap">
+  <video controls preload="metadata">
+    <source src="media1.mp4" type="video/mp4">
+    Your browser doesn't support embedded video. <a href="media1.mp4">Download the video</a> instead.
+  </video>
+  <p class="caption">The full separation cycle, start to finish.</p>
+</div>
+
+<div class="cycle">
+  <h2>The cycle, step by step</h2>
+  <div class="steps">
+    <div class="step">
+      <span class="n">01</span>
+      <div>
+        <h3>Collect</h3>
+        <p>Waste is gathered from the kitchen, bathroom, and any other room before it's sorted.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n">02</span>
+      <div>
+        <h3>Separate</h3>
+        <p>Items are split into categories — organic, plastic, paper, glass, and metal — each into its own container.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n">03</span>
+      <div>
+        <h3>Rinse and prep</h3>
+        <p>Containers and packaging are rinsed and flattened where needed, so nothing contaminates the batch it's placed in.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n">04</span>
+      <div>
+        <h3>Store</h3>
+        <p>Sorted waste is held in its designated bin until collection day.</p>
+      </div>
+    </div>
+    <div class="step">
+      <span class="n">05</span>
+      <div>
+        <h3>Hand off</h3>
+        <p>Each category goes out to the correct collection point or pickup, ready to be processed and reused.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  A small record of one household's recycling routine.
+</footer>
+
+</body>
+</html>
