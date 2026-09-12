@@ -2,202 +2,228 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sari Waste Separation Cycle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Waste Separation Conveyor System | Iliya Baktash</title>
+<meta name="description" content="Sari waste-separation conveyor system — a 12-line conveyor system designed, modeled and analyzed by Iliya Baktash for TTS Group.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --moss: #3f5b3f;
-    --forest: #24361f;
-    --paper: #f1efe6;
-    --clay: #b5652f;
-    --charcoal: #262420;
-    --line: rgba(38,36,32,0.15);
+  :root{
+    --paper:#EEF2F5;
+    --paper-card:#FFFFFF;
+    --ink:#16232F;
+    --ink-mid:#4A5C6E;
+    --ink-soft:#7A8A99;
+    --line:#C3CFD8;
+    --line-soft:#DAE2E8;
+    --navy-2:#1E4160;
+    --red:#C1400E;
+    --maxw:900px;
   }
-
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--charcoal);
-    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif;
-    line-height: 1.6;
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'IBM Plex Mono', ui-monospace, monospace;
+    font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+    background-image:linear-gradient(var(--line-soft) 1px, transparent 1px), linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:28px 28px; background-position:-1px -1px;
   }
+  h1,h2{ font-family:'Space Grotesk', sans-serif; margin:0; color:var(--ink); }
+  a{ color:var(--red); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+  p{ color:var(--ink-mid); max-width:68ch; }
 
-  header {
-    padding: 4.5rem 1.5rem 3rem;
-    text-align: left;
-    max-width: 760px;
-    margin: 0 auto;
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; border-bottom:1px solid var(--line);
+    position:sticky; top:0; background:rgba(238,242,245,.92); backdrop-filter:blur(6px);
   }
+  .mark{ font-family:'Space Grotesk', sans-serif; font-weight:600; color:var(--ink); font-size:1rem; }
+  .back-link{ font-size:.8rem; color:var(--ink-mid); border:1px solid var(--ink); padding:6px 12px; }
+  .back-link:hover{ color:var(--red); border-color:var(--red); text-decoration:none; }
 
-  .eyebrow {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.8rem;
-    color: var(--moss);
-    letter-spacing: 0.02em;
-    margin: 0 0 0.75rem;
+  main{ max-width:var(--maxw); margin:0 auto; padding:48px 24px 60px; }
+  .eyebrow{ color:var(--red); font-size:.8rem; letter-spacing:.05em; margin:0 0 10px; }
+  h1{ font-size:clamp(1.7rem,4.5vw,2.4rem); line-height:1.1; margin-bottom:10px; }
+  .meta{ font-size:.85rem; color:var(--ink-soft); margin:0 0 16px; }
+  .tags{ display:flex; gap:6px; margin-bottom:26px; }
+  .tag{ font-size:.66rem; letter-spacing:.04em; border:1px solid var(--navy-2); color:var(--navy-2); padding:2px 6px; }
+  .underline{ width:80px; height:2px; background:var(--red); margin-bottom:22px; }
+
+  .summary{ font-size:.95rem; margin-bottom:8px; }
+
+  .scope{ border-top:1px solid var(--line); padding-top:26px; margin-top:8px; }
+  .scope h2{ font-size:1.05rem; margin-bottom:12px; }
+  .scope ul{ padding-left:18px; color:var(--ink-mid); font-size:.9rem; }
+  .scope li{ margin-bottom:7px; }
+
+  .gallery-section{ border-top:1px solid var(--line); padding-top:26px; margin-top:30px; }
+  .gallery-section h2{ font-size:1.05rem; margin-bottom:14px; }
+  .video-frame{ border:1px solid var(--ink); background:#000; }
+  video{ width:100%; display:block; max-height:65vh; }
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
+    gap:10px;
   }
-
-  h1 {
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
-    line-height: 1.1;
-    margin: 0 0 1rem;
-    color: var(--forest);
-    font-weight: 500;
+  .gallery-thumb{
+    padding:0; margin:0; border:1px solid var(--line); background:var(--paper-card);
+    cursor:zoom-in; aspect-ratio:4/3; overflow:hidden; display:block;
   }
+  .gallery-thumb img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .2s ease; }
+  .gallery-thumb:hover img{ transform:scale(1.06); }
+  .gallery-thumb:focus-visible{ outline:2px solid var(--red); outline-offset:2px; }
 
-  header p {
-    font-size: 1.1rem;
-    max-width: 55ch;
-    color: var(--charcoal);
-    opacity: 0.85;
+  .lightbox{ position:fixed; inset:0; z-index:100; background:rgba(22,35,47,.94); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:60px 20px; }
+  .lightbox[hidden]{ display:none; }
+  .lightbox-img{ max-width:min(90vw,900px); max-height:72vh; object-fit:contain; border:1px solid rgba(234,241,244,.3); background:#fff; }
+  .lightbox-caption{ color:#EAF1F4; font-size:.82rem; margin-top:14px; text-align:center; max-width:70ch; }
+  .lightbox-close, .lightbox-nav{
+    position:fixed; background:none; border:1px solid rgba(234,241,244,.4); color:#EAF1F4;
+    font-family:'IBM Plex Mono', monospace; cursor:pointer; width:40px; height:40px;
+    display:flex; align-items:center; justify-content:center; font-size:1.2rem;
   }
+  .lightbox-close:hover, .lightbox-nav:hover{ border-color:var(--red); color:var(--red); }
+  .lightbox-close{ top:18px; right:18px; }
+  .lightbox-prev{ left:18px; top:50%; transform:translateY(-50%); }
+  .lightbox-next{ right:18px; top:50%; transform:translateY(-50%); }
+  @media (max-width:560px){ .lightbox-prev{ left:6px; } .lightbox-next{ right:6px; } }
 
-  .video-wrap {
-    max-width: 900px;
-    margin: 0 auto 4rem;
-    padding: 0 1.5rem;
-  }
-
-  video {
-    width: 100%;
-    display: block;
-    border-radius: 4px;
-    box-shadow: 0 12px 30px rgba(36, 54, 31, 0.18);
-  }
-
-  .caption {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.85rem;
-    color: var(--charcoal);
-    opacity: 0.6;
-    margin-top: 0.75rem;
-  }
-
-  .cycle {
-    max-width: 900px;
-    margin: 0 auto 5rem;
-    padding: 0 1.5rem;
-  }
-
-  .cycle h2 {
-    font-size: 1.6rem;
-    color: var(--forest);
-    font-weight: 500;
-    margin-bottom: 2.5rem;
-  }
-
-  .steps {
-    display: flex;
-    flex-direction: column;
-    border-top: 1px solid var(--line);
-  }
-
-  .step {
-    display: grid;
-    grid-template-columns: 3.5rem 1fr;
-    gap: 1.25rem;
-    padding: 1.75rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .step .n {
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 1.4rem;
-    color: var(--clay);
-    font-weight: 300;
-  }
-
-  .step h3 {
-    margin: 0 0 0.35rem;
-    font-size: 1.15rem;
-    color: var(--forest);
-    font-weight: 500;
-  }
-
-  .step p {
-    margin: 0;
-    max-width: 60ch;
-    opacity: 0.85;
-  }
-
-  footer {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5rem 4rem;
-    font-family: "Helvetica Neue", Arial, sans-serif;
-    font-size: 0.85rem;
-    color: var(--charcoal);
-    opacity: 0.55;
-  }
-
-  @media (max-width: 600px) {
-    header { padding: 3rem 1.25rem 2rem; }
-    .step { grid-template-columns: 2.5rem 1fr; }
+  footer{
+    max-width:var(--maxw); margin:0 auto; padding:0 24px 50px;
+    font-size:.78rem; color:var(--ink-soft);
+    border-top:1px solid var(--line); padding-top:20px; margin-top:34px;
   }
 </style>
 </head>
 <body>
 
 <header>
-  <p class="eyebrow">A home recycling record</p>
-  <h1>How our waste finds its way back into the cycle</h1>
-  <p>Every household throws things away. What happens in the ten seconds before that is the part worth watching — the sorting, the separating, the small decisions that keep material out of a landfill.</p>
+  <span class="mark">Iliya Baktash</span>
+  <a class="back-link" href="https://iliyabaktash.ir/#drawings">&#8592; Back to résumé</a>
 </header>
 
-<div class="video-wrap">
-  <video controls preload="metadata">
-    <source src="Media1.mp4" type="video/mp4">
-    Your browser doesn't support embedded video. <a href="Media1.mp4">Download the video</a> instead.
-  </video>
-  <p class="caption">The full separation cycle, start to finish.</p>
-</div>
+<main>
+  <p class="eyebrow">Project Record — DWG&#8209;004</p>
+  <h1>Waste Separation Conveyor System</h1>
+  <p class="meta">TTS Group · Sari, Iran · 2023–2024</p>
+  <div class="tags"><span class="tag">ME</span></div>
+  <div class="underline"></div>
 
-<div class="cycle">
-  <h2>The cycle, step by step</h2>
-  <div class="steps">
-    <div class="step">
-      <span class="n">01</span>
-      <div>
-        <h3>Collect</h3>
-        <p>Waste is gathered from the kitchen, bathroom, and any other room before it's sorted.</p>
-      </div>
+  <p class="summary">A 12‑line conveyor system designed for a waste‑separation plant in Sari — from 3D modeling and structural analysis through to fabrication drawings and on‑site installation.</p>
+
+  <div class="scope">
+    <h2>Scope of work</h2>
+    <ul>
+      <li>Simulated and 3D‑modeled the 12‑line conveyor system in Sidewinder and SolidWorks</li>
+      <li>Ran finite element analysis on the conveyor structure in SolidWorks Simulation</li>
+      <li>Calculated power requirement, drum/idler diameter and belt tension in MATLAB</li>
+      <li>Produced the bill of materials, cutting plans and construction drawings for the system</li>
+    </ul>
+  </div>
+
+  <div class="gallery-section">
+    <h2>Site video</h2>
+    <div class="video-frame">
+      <video src="media/Media1.mp4" poster="media/Picture7.jpg" controls preload="metadata" playsinline>
+        Your browser doesn't support embedded video —
+        <a href="media/Media1.mp4">download the video</a> instead.
+      </video>
     </div>
-    <div class="step">
-      <span class="n">02</span>
-      <div>
-        <h3>Separate</h3>
-        <p>Items are split into categories — organic, plastic, paper, glass, and metal — each into its own container.</p>
-      </div>
-    </div>
-    <div class="step">
-      <span class="n">03</span>
-      <div>
-        <h3>Rinse and prep</h3>
-        <p>Containers and packaging are rinsed and flattened where needed, so nothing contaminates the batch it's placed in.</p>
-      </div>
-    </div>
-    <div class="step">
-      <span class="n">04</span>
-      <div>
-        <h3>Store</h3>
-        <p>Sorted waste is held in its designated bin until collection day.</p>
-      </div>
-    </div>
-    <div class="step">
-      <span class="n">05</span>
-      <div>
-        <h3>Hand off</h3>
-        <p>Each category goes out to the correct collection point or pickup, ready to be processed and reused.</p>
-      </div>
+    <p style="font-size:.82rem; margin-top:8px;">The conveyor system running in the Sari waste‑separation plant.</p>
+  </div>
+
+  <div class="gallery-section">
+    <h2>Photos</h2>
+    <div class="gallery-grid">
+      <button type="button" class="gallery-thumb" data-full="media/Picture1.jpg" data-caption="Full 3D assembly of the 12‑line conveyor structure — SolidWorks">
+        <img src="media/Picture1.jpg" alt="Full SolidWorks assembly of the conveyor system" loading="lazy">
+      </button>
+      <button type="button" class="gallery-thumb" data-full="media/Picture2.jpg" data-caption="Detail model of a single conveyor line — SolidWorks">
+        <img src="media/Picture2.jpg" alt="Detail SolidWorks model of one conveyor line" loading="lazy">
+      </button>
+      <button type="button" class="gallery-thumb" data-full="media/Picture4.jpg" data-caption="AutoCAD layout — conveyor routing against the plant plot plan">
+        <img src="media/Picture4.jpg" alt="AutoCAD layout of the conveyor routing" loading="lazy">
+      </button>
+      <button type="button" class="gallery-thumb" data-full="media/Picture5.jpg" data-caption="Finite element stress analysis of the support structure — SolidWorks Simulation">
+        <img src="media/Picture5.jpg" alt="FEA stress contour plot of the support structure" loading="lazy">
+      </button>
+      <button type="button" class="gallery-thumb" data-full="media/Picture6.jpg" data-caption="Civil works — foundation pit prepared for the conveyor structure">
+        <img src="media/Picture6.jpg" alt="Foundation pit prepared on site" loading="lazy">
+      </button>
+      <button type="button" class="gallery-thumb" data-full="media/Picture7.jpg" data-caption="Steel structure erected inside the Sari separation plant">
+        <img src="media/Picture7.jpg" alt="Steel structure erected inside the plant" loading="lazy">
+      </button>
     </div>
   </div>
-</div>
+</main>
 
 <footer>
-  A small record of one household's recycling routine.
+  © <span id="year"></span> Iliya Baktash · <a href="mailto:Baktashiliya@gmail.com">Baktashiliya@gmail.com</a> · <a href="https://iliyabaktash.ir/">Full résumé →</a>
 </footer>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photo">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" type="button" aria-label="Previous photo">&#8249;</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" type="button" aria-label="Next photo">&#8250;</button>
+  <p class="lightbox-caption" id="lightboxCaption"></p>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  (function(){
+    var lightbox = document.getElementById('lightbox');
+    var lbImg = document.getElementById('lightboxImg');
+    var lbCap = document.getElementById('lightboxCaption');
+    var closeBtn = document.getElementById('lightboxClose');
+    var prevBtn = document.getElementById('lightboxPrev');
+    var nextBtn = document.getElementById('lightboxNext');
+    var group = [];
+    var index = 0;
+
+    function show(){
+      var btn = group[index];
+      var img = btn.querySelector('img');
+      lbImg.src = btn.getAttribute('data-full') || img.src;
+      lbImg.alt = img.alt || '';
+      lbCap.textContent = btn.getAttribute('data-caption') || '';
+    }
+    function openAt(g, i){
+      group = g; index = i;
+      show();
+      lightbox.hidden = false;
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function closeLB(){
+      lightbox.hidden = true;
+      document.body.style.overflow = '';
+    }
+    function next(){ index = (index + 1) % group.length; show(); }
+    function prev(){ index = (index - 1 + group.length) % group.length; show(); }
+
+    document.querySelectorAll('.gallery-grid').forEach(function(grid){
+      var thumbs = Array.prototype.slice.call(grid.querySelectorAll('.gallery-thumb'));
+      thumbs.forEach(function(btn, i){
+        btn.addEventListener('click', function(){ openAt(thumbs, i); });
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLB);
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    lightbox.addEventListener('click', function(e){ if(e.target === lightbox) closeLB(); });
+    document.addEventListener('keydown', function(e){
+      if(lightbox.hidden) return;
+      if(e.key === 'Escape') closeLB();
+      if(e.key === 'ArrowRight') next();
+      if(e.key === 'ArrowLeft') prev();
+    });
+  })();
+</script>
 
 </body>
 </html>
